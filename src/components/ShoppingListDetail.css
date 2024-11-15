@@ -1,0 +1,316 @@
+/* ShoppingListDetail.css */
+
+/* Main container styling */
+.shopping-list-container {
+  max-width: 500px;
+  margin: 0 auto;
+  font-family: Arial, sans-serif;
+  padding: 20px;
+}
+
+/* Gradient header */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 60px;
+  background: linear-gradient(to right, #ff5f6d, #ffc371);
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+  position: relative;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.back-button {
+  position: absolute;
+  left: 20px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: white;
+}
+
+/* Editable list name container */
+.list-name-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.list-name-container h1 {
+  font-size: 1.5rem;
+  color: white;
+  margin-right: 10px;
+}
+
+.edit-icon {
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: white;
+  transition: color 0.3s ease;
+}
+
+.edit-icon:hover {
+  color: #ffc371;
+}
+
+/* Editable input for list name */
+.edit-list-name-input {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+  border: none;
+  border-bottom: 2px solid #ddd;
+  background: transparent;
+  padding: 5px;
+  outline: none;
+  width: 80%;
+  margin: 0 auto;
+}
+
+.edit-list-name-input:focus {
+  border-bottom-color: #ff5f6d;
+}
+
+/* Items container styling */
+.items-container {
+  padding: 10px 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  margin-top: 10px;
+}
+
+/* Individual item rows */
+.item-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.item-row label {
+  display: flex;
+  align-items: center;
+}
+
+.item-row input[type="checkbox"] {
+  margin-right: 10px;
+  accent-color: #ff5f6d;
+}
+
+.resolved label span {
+  color: #b0b0b0;
+  text-decoration: line-through;
+}
+
+.resolved input[type="checkbox"] {
+  accent-color: #b0b0b0;
+}
+
+.item-action-button {
+  background: none;
+  border: none;
+  color: #888;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.item-action-button:hover {
+  color: #333;
+}
+
+/* Add item form styling */
+.add-item-form {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.add-item-input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  outline: none;
+  font-size: 1rem;
+}
+
+.add-item-input:focus {
+  border-color: #ff5f6d;
+}
+
+.add-item-button {
+  margin-left: 10px;
+  padding: 10px 20px;
+  background: linear-gradient(to right, #ff5f6d, #ffc371);
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.add-item-button:hover {
+  background: linear-gradient(to right, #ff7578, #ffd079);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+}
+
+.add-item-button:active {
+  transform: scale(0.98);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Members container styling */
+.members-container {
+  padding: 15px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+}
+
+.members-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+/* Member list styling */
+.member-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.member-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.member-item:last-child {
+  border-bottom: none;
+}
+
+.member-name {
+  font-size: 1rem;
+  color: #333;
+}
+
+/* Action buttons for members */
+.member-action-button {
+  font-size: 0.9rem;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.remove-button {
+  background-color: #ff5f6d;
+  color: white;
+}
+
+.remove-button:hover {
+  background-color: #e04b56;
+}
+
+.leave-button {
+  background-color: #ffc371;
+  color: white;
+}
+
+.leave-button:hover {
+  background-color: #ffae62;
+}
+
+/* Add member form styling */
+.add-member-form {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.add-member-input {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  outline: none;
+  font-size: 1rem;
+}
+
+.add-member-input:focus {
+  border-color: #ff5f6d;
+}
+
+.add-member-button {
+  margin-left: 10px;
+  padding: 8px 15px;
+  background: linear-gradient(to right, #ff5f6d, #ffc371);
+  color: white;
+  font-size: 0.9rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.add-member-button:hover {
+  background: linear-gradient(to right, #ff7578, #ffd079);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.add-member-button:active {
+  transform: scale(0.98);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 600px) {
+  .shopping-list-container {
+    padding: 10px;
+  }
+
+  .header {
+    font-size: 1.2rem;
+    height: 50px;
+  }
+
+  .back-button {
+    font-size: 1rem;
+  }
+
+  .item-row {
+    padding: 8px 0;
+    font-size: 0.9rem;
+  }
+
+  .list-name-container h1 {
+    font-size: 1.2rem;
+  }
+
+  .edit-icon {
+    font-size: 0.9rem;
+  }
+
+  .floating-add-button {
+    bottom: 20px;
+    right: 20px;
+    font-size: 0.9rem;
+    padding: 8px 16px;
+  }
+}
