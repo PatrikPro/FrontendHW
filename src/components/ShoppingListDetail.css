@@ -314,3 +314,36 @@
     padding: 8px 16px;
   }
 }
+/* Add item row inside the list */
+.add-item-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.add-item-input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  outline: none;
+  font-size: 1rem;
+}
+
+.add-item-button {
+  padding: 10px 20px;
+  background: linear-gradient(to right, #ff5f6d, #ffc371);
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.add-item-button:hover {
+  background: linear-gradient(to right, #ff7578, #ffd079);
+}

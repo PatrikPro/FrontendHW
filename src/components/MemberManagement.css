@@ -1,0 +1,94 @@
+.add-member-container {
+    margin-top: 20px;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .add-member-form {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .add-member-input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+  }
+  
+  .add-member-input:focus {
+    border-color: #ff5f6d;
+    outline: none;
+  }
+  
+  .add-member-button {
+    padding: 10px 20px;
+    background: linear-gradient(to right, #ff5f6d, #ffc371);
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .add-member-button:hover {
+    background: linear-gradient(to right, #ff7578, #ffd079);
+  }
+  
+  .add-member-button:active {
+    transform: scale(0.98);
+  }
+  
+  .member-list-container {
+    margin-top: 20px;
+  }
+  
+  .member-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .member-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  
+  .member-item:last-child {
+    border-bottom: none;
+  }
+  
+  .member-name {
+    font-size: 1rem;
+    color: #333;
+  }
+  
+  .member-email {
+    font-size: 0.9rem;
+    color: #888;
+    margin-left: 10px;
+  }
+  .remove-member-button {
+    background: none;
+    border: none;
+    color: #ff5f6d;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+  
+  .remove-member-button:hover {
+    color: #ffc371;
+  }
+    
+  

@@ -28,6 +28,7 @@ const currentUser = { id: 'user1', name: 'Owner User' }; // Change to 'user2' to
 function ShoppingListDetail() {
   const [listData, setListData] = useState(SHOPPING_LIST_DATA);
   const [isEditingName, setIsEditingName] = useState(false);
+  const [newItem, setNewItem] = useState(""); // New item input
 
   const isOwner = listData.owner.id === currentUser.id;
 
@@ -126,9 +127,21 @@ function ShoppingListDetail() {
             </button>
           </div>
         ))}
-      </div>
 
-      <AddItemForm onAddItem={addItem} />
+        {/* Add Item Section Inside the List */}
+        <div className="item-row add-item-row">
+          <input
+            type="text"
+            placeholder="Enter item name"
+            value={newItem}
+            onChange={(e) => setNewItem(e.target.value)}
+            className="add-item-input"
+          />
+          <button className="add-item-button" onClick={() => addItem(newItem)}>
+            Add
+          </button>
+        </div>
+      </div>
 
       <MemberManagement
         members={listData.members}
