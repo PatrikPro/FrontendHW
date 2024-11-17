@@ -1,64 +1,66 @@
 import React, { useState } from "react";
-import "./MemberManagement.css"; // Ensure styles are updated
+import "./MemberManagement.css";
 
-function MemberManagement() {
-  const [inviteEmail, setInviteEmail] = useState(""); // For the email input
-  const [members, setMembers] = useState([]); // To hold the list of members
+function MemberManagement({ members, onAddMember, onRemoveMember, userId }) {
+  const [inviteEmail, setInviteEmail] = useState("");
 
-  // Add a member locally
-  const addMember = () => {
+  // Find if the current user is the owner
+  const isOwner = members[0]?.id === userId;
+
+  // Add a member (only for the owner)
+  const handleAddMember = () => {
     if (!inviteEmail) {
       alert("Please enter a valid email.");
       return;
     }
-    const newMember = { email: inviteEmail, name: inviteEmail.split("@")[0] }; // Generate a name from the email
-    setMembers((prev) => [...prev, newMember]); // Add the new member to the list
-    alert(`Member with email ${inviteEmail} has been added.`);
-    setInviteEmail(""); // Clear the input field
+    onAddMember(inviteEmail);
+    setInviteEmail("");
   };
 
-  // Remove a member locally
-  const removeMember = (email) => {
-    setMembers((prev) => prev.filter((member) => member.email !== email));
-    alert(`Member with email ${email} has been removed.`);
+  // Remove a member
+  const handleRemoveMember = (memberId) => {
+    if (memberId === userId) {
+      onRemoveMember(memberId); // Allow any user to remove themselves
+    } else if (isOwner) {
+      onRemoveMember(memberId); // Allow the owner to remove others
+    }
   };
 
   return (
-    <div className="add-member-container">
-      <h2>Manage Members</h2>
+    <div className="members-container">
+      <h2 className="members-title">Members</h2>
 
-      {/* Add Member Section */}
-      <div className="add-member-form">
-        <input
-          type="email"
-          placeholder="Enter member email"
-          value={inviteEmail}
-          onChange={(e) => setInviteEmail(e.target.value)}
-          className="add-member-input"
-        />
-        <button className="add-member-button" onClick={addMember}>
-          Add Member
-        </button>
-      </div>
-
-      {/* Display Current Members */}
-      <div className="member-list-container">
-        <h3>Current Members</h3>
-        <ul className="member-list">
-          {members.map((member, index) => (
-            <li key={index} className="member-item">
-              <span className="member-name">{member.name}</span>
-              <span className="member-email">{member.email}</span>
+      <ul className="member-list">
+        {members.map((member) => (
+          <li key={member.id} className="member-item">
+            <span className="member-name">{member.name}</span>
+            {isOwner || member.id === userId ? (
               <button
-                className="remove-member-button"
-                onClick={() => removeMember(member.email)}
+                className="member-action-button remove-button"
+                onClick={() => handleRemoveMember(member.id)}
               >
-                -
+                {member.id === userId ? "Leave" : "Remove"}
               </button>
-            </li>
-          ))}
-        </ul>
-      </div>
+            ) : null}
+          </li>
+        ))}
+      </ul>
+
+      {/* Add member form only visible to the owner */}
+      {isOwner && (
+        <div className="add-member-form">
+          <input
+            type="email"
+            placeholder="Enter member email"
+            value={inviteEmail}
+            onChange={(e) => setInviteEmail(e.target.value)}
+            className="add-member-input"
+          />
+          <button className="add-member-button" onClick={handleAddMember}>
+            Add Member
+          </button>
+        </div>
+      )}
     </div>
   );
 }

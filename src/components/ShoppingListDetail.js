@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import AddItemForm from './AddItemForm';
 import MemberManagement from './MemberManagement';
 import './ShoppingListDetail.css';
 
@@ -15,9 +14,9 @@ const SHOPPING_LIST_DATA = {
     { id: 'item1', name: 'Doritos', isResolved: false },
     { id: 'item2', name: 'Nuts', isResolved: false },
     { id: 'item3', name: 'Haribo', isResolved: false },
-    { id: 'item4', name: 'Coca Cola', isResolved: false },
+    { id: 'item4', name: 'Coca Cola', isResolved: true },
     { id: 'item5', name: 'Pepsi', isResolved: false },
-    { id: 'item6', name: 'Milk', isResolved: false },
+    { id: 'item6', name: 'Milk', isResolved: true },
     { id: 'item7', name: 'Juice', isResolved: false },
     { id: 'item8', name: 'Apple', isResolved: false }
   ]
@@ -28,7 +27,8 @@ const currentUser = { id: 'user1', name: 'Owner User' }; // Change to 'user2' to
 function ShoppingListDetail() {
   const [listData, setListData] = useState(SHOPPING_LIST_DATA);
   const [isEditingName, setIsEditingName] = useState(false);
-  const [newItem, setNewItem] = useState(""); // New item input
+  const [newItem, setNewItem] = useState('');
+  const [filter, setFilter] = useState('all'); // Filter state: 'all', 'unresolved', or 'resolved'
 
   const isOwner = listData.owner.id === currentUser.id;
 
@@ -60,6 +60,24 @@ function ShoppingListDetail() {
     }));
   };
 
+  const addMember = (email) => {
+    const newMember = {
+      id: `user${listData.members.length + 1}`,
+      name: email.split('@')[0]
+    };
+    setListData((prevState) => ({
+      ...prevState,
+      members: [...prevState.members, newMember]
+    }));
+  };
+
+  const removeMember = (memberId) => {
+    setListData((prevState) => ({
+      ...prevState,
+      members: prevState.members.filter((member) => member.id !== memberId)
+    }));
+  };
+
   const editListName = (newName) => {
     if (isOwner) {
       setListData((prevState) => ({
@@ -70,7 +88,17 @@ function ShoppingListDetail() {
     }
   };
 
-  const sortedItems = listData.items
+  const filteredItems = listData.items.filter((item) => {
+    if (filter === 'unresolved') {
+      return !item.isResolved;
+    }
+    if (filter === 'resolved') {
+      return item.isResolved;
+    }
+    return true; // Default: 'all'
+  });
+
+  const sortedItems = filteredItems
     .slice()
     .sort((a, b) => {
       if (a.isResolved === b.isResolved) {
@@ -111,6 +139,28 @@ function ShoppingListDetail() {
         )}
       </header>
 
+      {/* Filter Section */}
+      <div className="filter-container">
+        <button
+          className={`filter-button ${filter === 'all' ? 'active' : ''}`}
+          onClick={() => setFilter('all')}
+        >
+          All
+        </button>
+        <button
+          className={`filter-button ${filter === 'unresolved' ? 'active' : ''}`}
+          onClick={() => setFilter('unresolved')}
+        >
+          Unresolved
+        </button>
+        <button
+          className={`filter-button ${filter === 'resolved' ? 'active' : ''}`}
+          onClick={() => setFilter('resolved')}
+        >
+          Resolved
+        </button>
+      </div>
+
       <div className="items-container">
         {sortedItems.map((item) => (
           <div key={item.id} className={`item-row ${item.isResolved ? 'resolved' : ''}`}>
@@ -145,8 +195,8 @@ function ShoppingListDetail() {
 
       <MemberManagement
         members={listData.members}
-        onAddMember={isOwner ? addItem : null}
-        onRemoveMember={isOwner ? removeItem : null}
+        onAddMember={isOwner ? addMember : null}
+        onRemoveMember={isOwner || currentUser ? removeMember : null}
         userId={currentUser.id}
       />
     </div>
