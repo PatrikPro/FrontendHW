@@ -1,0 +1,169 @@
+/* Main Header Styling */
+.header {
+  display: flex;
+  justify-content: space-between; /* Space between title and add button */
+  align-items: center;
+  padding: 10px 20px;
+  background: linear-gradient(to right, #ff5f6d, #ffc371);
+  color: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.header-title {
+  margin: 0;
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+/* Add Button Styling */
+.add-button {
+  background: #ff5f6d;
+  color: white;
+  padding: 8px 20px; /* Increased padding for a better button size */
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.add-button:hover {
+  background: #ff3d4f;
+  transform: scale(1.05);
+}
+
+/* Filter Section */
+.filter-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 20px;
+}
+
+/* Container for Tiles */
+.tiles-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px; /* Spacing between tiles */
+  padding: 20px;
+  justify-content: flex-start; /* Align tiles from the left */
+}
+
+/* Individual Tile Styling */
+.list-tile {
+  position: relative;
+  width: 200px; /* Increased width for better spacing */
+  padding: 15px 10px 15px 35px; /* Space for the archive button */
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.list-tile:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.list-tile.archived {
+  opacity: 0.6;
+  filter: grayscale(50%);
+}
+
+/* Archive Button on the Left */
+.archive-button {
+  position: absolute;
+  left: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: #ff9500;
+  transition: color 0.3s ease;
+}
+
+.archive-button:hover {
+  color: #e07b00;
+}
+
+/* Delete Button on the Right */
+.delete-button {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  background: none;
+  border: none;
+  color: red;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.delete-button:hover {
+  color: darkred;
+}
+
+/* Floating Add List Button */
+.add-list-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: linear-gradient(to right, #ff5f6d, #ffc371);
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 10px 10px
+}
+
+.add-list-button:hover {
+  background: linear-gradient(to right, #ff7578, #ffd079);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+  transform: scale(1.05);
+}
+
+.add-list-button:active {
+  transform: scale(0.95);
+}
+
+/* Responsive Design for Smaller Screens */
+@media (max-width: 768px) {
+  .tiles-container {
+    justify-content: center; /* Center tiles on small screens */
+  }
+
+  .list-tile {
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+
+  .header-title {
+    font-size: 1.5rem;
+  }
+
+  .add-button {
+    font-size: 0.9rem;
+    padding: 6px 12px;
+  }
+
+  .add-list-button {
+    width: 50px;
+    height: 50px;
+    font-size: 1.2rem;
+  }
+}

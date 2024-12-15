@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // Import navigace
 import MemberManagement from './MemberManagement';
 import './ShoppingListDetail.css';
 
@@ -22,13 +23,14 @@ const SHOPPING_LIST_DATA = {
   ]
 };
 
-const currentUser = { id: 'user1', name: 'Owner User' }; // Change to 'user2' to test as a non-owner
+const currentUser = { id: 'user1', name: 'Owner User' }; // Přepněte na 'user2' pro testování člena
 
 function ShoppingListDetail() {
+  const navigate = useNavigate(); // Inicializace navigace
   const [listData, setListData] = useState(SHOPPING_LIST_DATA);
   const [isEditingName, setIsEditingName] = useState(false);
   const [newItem, setNewItem] = useState('');
-  const [filter, setFilter] = useState('all'); // Filter state: 'all', 'unresolved', or 'resolved'
+  const [filter, setFilter] = useState('all'); // 'all', 'unresolved', 'resolved'
 
   const isOwner = listData.owner.id === currentUser.id;
 
@@ -42,6 +44,7 @@ function ShoppingListDetail() {
   };
 
   const addItem = (itemName) => {
+    if (!itemName.trim()) return;
     const newItem = {
       id: `item${listData.items.length + 1}`,
       name: itemName,
@@ -51,6 +54,7 @@ function ShoppingListDetail() {
       ...prevState,
       items: [...prevState.items, newItem]
     }));
+    setNewItem('');
   };
 
   const removeItem = (itemId) => {
@@ -89,28 +93,25 @@ function ShoppingListDetail() {
   };
 
   const filteredItems = listData.items.filter((item) => {
-    if (filter === 'unresolved') {
-      return !item.isResolved;
-    }
-    if (filter === 'resolved') {
-      return item.isResolved;
-    }
+    if (filter === 'unresolved') return !item.isResolved;
+    if (filter === 'resolved') return item.isResolved;
     return true; // Default: 'all'
   });
 
-  const sortedItems = filteredItems
-    .slice()
-    .sort((a, b) => {
-      if (a.isResolved === b.isResolved) {
-        return a.name.localeCompare(b.name);
-      }
-      return a.isResolved ? 1 : -1; // Active items come before resolved ones
-    });
+  const sortedItems = filteredItems.slice().sort((a, b) => {
+    if (a.isResolved === b.isResolved) {
+      return a.name.localeCompare(b.name);
+    }
+    return a.isResolved ? 1 : -1; // Nevyřešené položky první
+  });
 
   return (
     <div className="shopping-list-container">
       <header className="header">
-        <span className="back-button">←</span>
+        {/* Zpětná navigace */}
+        <span className="back-button" onClick={() => navigate('/')}>
+          ←
+        </span>
         {isEditingName ? (
           <input
             type="text"
@@ -139,7 +140,7 @@ function ShoppingListDetail() {
         )}
       </header>
 
-      {/* Filter Section */}
+      {/* Filtrování položek */}
       <div className="filter-container">
         <button
           className={`filter-button ${filter === 'all' ? 'active' : ''}`}
@@ -161,6 +162,7 @@ function ShoppingListDetail() {
         </button>
       </div>
 
+      {/* Položky seznamu */}
       <div className="items-container">
         {sortedItems.map((item) => (
           <div key={item.id} className={`item-row ${item.isResolved ? 'resolved' : ''}`}>
@@ -178,7 +180,7 @@ function ShoppingListDetail() {
           </div>
         ))}
 
-        {/* Add Item Section Inside the List */}
+        {/* Přidání nové položky */}
         <div className="item-row add-item-row">
           <input
             type="text"
@@ -193,6 +195,7 @@ function ShoppingListDetail() {
         </div>
       </div>
 
+      {/* Správa členů */}
       <MemberManagement
         members={listData.members}
         onAddMember={isOwner ? addMember : null}
